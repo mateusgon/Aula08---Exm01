@@ -6,6 +6,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -21,6 +22,7 @@ public class JanelaTurmas extends JFrame {
         lstTurmas.setModel(new TurmasListModel(turmas));
         add(new JScrollPane(lstTurmas), BorderLayout.WEST);
         add(new JScrollPane(lstAlunos), BorderLayout.CENTER);
+        lstTurmas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         lstTurmas.addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
@@ -29,6 +31,10 @@ public class JanelaTurmas extends JFrame {
                 {    
                     System.out.println(selecionada);
                     lstAlunos.setModel(new AlunosListModel1(selecionada.getAlunos()));
+                }
+                else
+                {
+                    lstAlunos.setModel(new DefaultListModel<>());
                 }
             }
         });
